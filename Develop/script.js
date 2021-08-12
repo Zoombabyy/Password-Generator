@@ -7,11 +7,13 @@ function passwordQuestions() {
   var start = prompt(
     "How many characters would you like your password to be? (Pick a number between 8 and 128)"
   );
-  if (start < 8) {
+  if (isNaN(start)) {
+    alert("Please enter a numerical value");
+    passwordQuestions();
+  } else if (start < 8) {
     alert("Please enter a number higher than 8");
     passwordQuestions();
-  }
-  if (start > 128) {
+  } else if (start > 128) {
     alert("Please enter a number smaller than 129");
     passwordQuestions();
   }
@@ -40,11 +42,47 @@ function passwordQuestions() {
   return userQuestionChoice;
 }
 
-function passwordGenerator() {
+function randomizer(a) {
+  var randomI = Math.floor(Math.random() * a.length);
+  var randomE = a[randomI];
+
+  return randomE;
+}
+
+function generatePassword() {
   var choices = passwordQuestions();
   var password = [];
   var characterList = [];
   var chosenChar = [];
+
+  if (choices.lowerQuestion) {
+    characterList = characterList.concat(lowerAlpha);
+    chosenChar.push(randomizer(lowerAlpha));
+  }
+  if (choices.capitalQuestion) {
+    characterList = characterList.concat(capitalAlpha);
+    chosenChar.push(randomizer(capitalAlpha));
+  }
+  if (choices.numQuestion) {
+    characterList = characterList.concat(numChar);
+    chosenChar.push(randomizer(numChar));
+  }
+  if (choices.specialQuestion) {
+    characterList = characterList.concat(specialChar);
+    chosenChar.push(randomizer(specialChar));
+  }
+
+  for (var i = 0; i < choices.length; i++) {
+    var computerChoices = randomizer(characterList);
+
+    password.push(computerChoices);
+  }
+
+  for (var i = 0; i < chosenChar.length; i++) {
+    password[i] = chosenChar[i];
+  }
+
+  return password.join("");
 }
 
 // Assignment Code
@@ -60,3 +98,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+debugger;

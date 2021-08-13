@@ -7,6 +7,7 @@ function passwordQuestions() {
   var start = prompt(
     "How many characters would you like your password to be? (Pick a number between 8 and 128)"
   );
+
   if (isNaN(start)) {
     alert("Please enter a numerical value");
     return passwordQuestions();
@@ -17,6 +18,7 @@ function passwordQuestions() {
     alert("Please enter a number smaller than 129");
     return passwordQuestions();
   }
+
   var lowerQuestion = confirm("Would you like lower case characters?");
   var capitalQuestion = confirm("Would you like capital characters?");
   var numQuestion = confirm("Would you like numeric characters?");
@@ -43,8 +45,8 @@ function passwordQuestions() {
 }
 
 function randomizer(input) {
-  var number = Math.floor(Math.random() * input.length);
-  var result = input[number];
+  var randomNum = Math.floor(Math.random() * input.length);
+  var result = input[randomNum];
 
   return result;
 }

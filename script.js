@@ -89,6 +89,7 @@ function generatePassword() {
   return password.join("");
 }
 
+//I wanted to figure out how to randomize the password even more so i googled and got the below code from stackoverflow
 function shuffle(array) {
   var currentIndex = array.length,
     randomIndex;
@@ -119,3 +120,4 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+

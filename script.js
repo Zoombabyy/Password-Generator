@@ -9,13 +9,13 @@ function passwordQuestions() {
   );
   if (isNaN(start)) {
     alert("Please enter a numerical value");
-    passwordQuestions();
+    return passwordQuestions();
   } else if (start < 8) {
     alert("Please enter a number higher than 8");
-    passwordQuestions();
+    return passwordQuestions();
   } else if (start > 128) {
     alert("Please enter a number smaller than 129");
-    passwordQuestions();
+    return passwordQuestions();
   }
   var lowerQuestion = confirm("Would you like lower case characters?");
   var capitalQuestion = confirm("Would you like capital characters?");
@@ -29,7 +29,7 @@ function passwordQuestions() {
     specialQuestion === false
   ) {
     alert("Please select at least one character type to continue");
-    passwordQuestions();
+    return passwordQuestions();
   }
 
   var userQuestionChoice = {
@@ -42,11 +42,11 @@ function passwordQuestions() {
   return userQuestionChoice;
 }
 
-function randomizer(a) {
-  var randomI = Math.floor(Math.random() * a.length);
-  var randomE = a[randomI];
+function randomizer(input) {
+  var number = Math.floor(Math.random() * input.length);
+  var result = input[number];
 
-  return randomE;
+  return result;
 }
 
 function generatePassword() {
@@ -72,7 +72,7 @@ function generatePassword() {
     chosenChar.push(randomizer(specialChar));
   }
 
-  for (var i = 0; i < choices.length; i++) {
+  for (var i = 0; i < choices.start; i++) {
     var computerChoices = randomizer(characterList);
 
     password.push(computerChoices);
@@ -82,7 +82,26 @@ function generatePassword() {
     password[i] = chosenChar[i];
   }
 
+  shuffle(password);
+
   return password.join("");
+}
+
+function shuffle(array) {
+  var currentIndex = array.length,
+    randomIndex;
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
 }
 
 // Assignment Code
